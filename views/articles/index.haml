@@ -1,0 +1,25 @@
+%h1 Articles
+
+%a{href: "/articles/new", class: "btn btn-default"} New Article
+.row
+  .col-md-10.col-md-offset-1
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Image
+          %th Title
+          %th Content
+          %th Published at
+          %th Actions
+      %tbody
+        - @articles.each do |article|
+          %tr
+            %td
+              %img{src: "#{article.image.url}"}
+            %td= article.title
+            %td= article.content
+            %td= l article.published_at, format: :special
+            %td
+              %a{href: "/article/#{article.id}/edit"} Edit
+              %a{href: "/article/#{article.id}"} More
+              %a{href: "", rel: "notfollow", onclick: "if(confirm('Are you sure?')) $.post('/article/#{article.id}', {_method: 'delete' }).done(location.reload())"} Delete

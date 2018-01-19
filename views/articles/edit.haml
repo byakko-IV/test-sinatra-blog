@@ -1,0 +1,22 @@
+%h2 Edit Article #{ @article.title.upcase }
+%br
+.col-md-6.col-md-offset-3
+  %form{ action: "/article/#{@article.id}", method: 'post', role: 'from', enctype: 'multipart/form-data' }
+    %input{:name => "_method", :type => "hidden", :value => "patch"}/
+    .form-group
+      %label.control-label{ for: 'article-title' } Title
+      %input#article-title.form-control{ name: 'article[title]', type: 'text', value: @article.title }
+    .form-group
+      %label.control-label{ for: 'article-content' } Content
+      %input#article-content.form-control{ name: 'article[content]', type: 'text', value: @article.content }
+    .form-group
+      %label.control-label{ for: 'article-published' } Published
+      %select#article-published.form-control{ name: 'article[published]' }
+        %option{selected: @article.published } Published
+        %option{selected: !@article.published } Unpublished
+      %input{ name: 'article[published_at]', type: 'hidden', value: @article.published_at }
+    .form-group
+      %label.control-label{ for: 'article-image'} Image
+      %input#article-content.form-control{ name: 'article[image]', type: 'file'}
+    .form-group
+      %button.btn.btn-success{ type: 'submit' } Submit

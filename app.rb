@@ -1,0 +1,12 @@
+require 'i18n'
+require 'sinatra'
+require "sinatra/reloader" if development?
+require 'sinatra/activerecord'
+require 'sinatra/flash'
+require 'sinatra/redirect_with_flash'
+require 'carrierwave'
+require 'carrierwave/orm/activerecord'
+require './uploader/image_uploader'
+require './models/article'
+require './models/comment'
+require './config/routes'

@@ -1,0 +1,31 @@
+.col-md-8.col-md-offset-2{style: "margin-top:2%"}
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        %h2= @article.title
+    .panel-body
+      %p= @article.content
+    .panel-footer
+      %p
+        %strong published at:
+        = @article.published_at
+.col-md-8.col-md-offset-2{style: "margin-top:2%"}
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        %h4 Comments
+      %form{ action: '/comments', method: 'post', role: 'form', class: 'form-inline pull-right' }
+        .form-group
+          %input{ name: 'comment[body]', type: 'text' }
+          %input{ name: 'comment[article_id]', type: 'hidden', value: @article.id }
+        .form-group
+          %button.btn.btn-default{type: 'submit' } Comment
+    .panel-body
+      - @article.comments.each do |comment|
+        .well
+          %p
+            = comment.body
+            %small
+              %a.pull-right{href: "", rel: "notfollow", onclick: "if(confirm('Are you sure?')) $.post('/comment/#{comment.id}', {_method: 'delete' }).done(location.reload())"} Delete
+      - if @article.comments.empty?
+        %p There is no comments for this article
